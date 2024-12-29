@@ -1,0 +1,71 @@
+/* main style for the entire document */
+body {
+    font-family: 'Roboto', Arial, sans-serif; /* sets the font, prioritizing 'Roboto' */
+    margin: 0; /* removes default margin */
+    padding: 0;
+    background-color: #f7f7f7; /* background color */
+    color: #333; /* text color */
+    line-height: 1.6; /* increased line height for better readability */
+}
+/* header style */
+header {
+    background-color: #4caf50;
+    color: white;
+    text-align: left; /* centers the text horizontally */
+    padding: 20px 0; /* vertical padding */
+}
+header h1 {
+    margin: 20px;
+}
+/* content style */
+main {
+    display: flex; /* flex container */
+    justify-content: space-between; /* distributes sections with space in between */
+    gap: 20px; /* gap between sections */
+    padding: 20px; /* padding inside the main container */
+}
+/* sections style */
+section {
+    flex: 1; /* ensures sections grow/shrink equally */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* adds a subtle shadow effect */
+}
+/* section header style */
+section h2 {
+    margin-top: 0; 
+    color: #4caf50;
+}
+/* recipe list style */
+#recipe-list ul {
+    list-style: none; /* removes default list bullets */
+    padding: 0;
+}
+#recipe-list ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* adds a light gray line between items */
+    cursor: pointer; /* changes the cursor to indicate interactivity */
+}
+#recipe-list ul li:hover {
+    background-color: #f1f1f1; /* changes background on hover */
+}
+/* recipe image style */
+#recipe-details img {
+    width: 100%; /* take up full width of its container */
+    height: auto; /* keep aspect ratio */
+    max-height: 300px; /* sets max height to prevent oversized images */
+    object-fit: cover; /* image covers the given dimensions without distortion */
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* footer style */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #333;
+    color: white;
+    margin-top: 20px;
+}

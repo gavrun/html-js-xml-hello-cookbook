@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta, character encoding for the document, compatibility with Internet Explorer -->
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+    <!-- title in the browser tab -->
+    <title>Cook book</title>
+
+    <!-- page responsive on mobile devices -->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- external CSS file -->
+    <link rel='stylesheet' type='text/css' media='screen' href='styles/main.css'>
+    <!-- inline CSS to define a custom font -->
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url('fonts/Roboto-Regular.ttf') format('truetype'); /* loads the Roboto font from the local assets*/
+        }
+    </style>
+</head>
+
+<body>
+    <!-- layout header section -->
+    <header>
+        <h1>Cook book</h1>
+    </header>
+
+    <main>
+        <!-- layout section for displaying the list of recipes -->
+        <section id="recipe-list">
+            <h2>Recipe list</h2>
+            <ul>
+                <!-- placeholder dynamically populated list of recipies -->
+            </ul>
+        </section>
+
+        <!-- layout section for details of the selected recipe -->
+        <section id="recipe-details">
+            <h2>Recipe details</h2>
+            <!-- placeholder for recipe details -->
+            <p>Select a recipe to see details.</p>
+        </section>
+
+    </main>
+
+    <!-- layout footer section -->
+    <footer>
+        <p>&copy; 2024 Cook Book ABC</p> <!-- copyright information -->
+    </footer>
+
+    <!-- external JavaScript file for adding interactivity -->
+    <script src='scripts/main.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- specifies XML version and character encoding -->
+<recipes>    <!-- root element containing all recipes -->
+    <!-- child element for actual recipe -->
+    <recipe>
+        <title>Spaghetti Bolognese</title>
+        <about>Originates from Bologna, Italy.</about>
+        <ingredients>
+            <ingredient>Spaghetti, 200g</ingredient>
+            <ingredient>Ground Beef, 300g</ingredient>
+            <ingredient>Tomato Sauce, 250ml</ingredient>
+            <ingredient>Onion, 1 medium</ingredient>
+            <ingredient>Garlic, 2 cloves</ingredient>
+            <ingredient>Olive Oil, 2 tbsp</ingredient>
+            <ingredient>Parmesan Cheese, 50g</ingredient>
+        </ingredients>
+        <instructions>
+            Boil spaghetti until al dente. In a pan, heat olive oil and sauté chopped onion and garlic until golden. Add ground beef and cook until browned. Stir in tomato sauce and simmer for 20 minutes. Serve sauce over spaghetti, topped with grated Parmesan.
+        </instructions>
+    </recipe>
+    <!-- end of recipe child element -->
+
+    <recipe>
+        <title>Chicken Curry</title>
+        <about>A staple of Indian cuisine, enjoyed worldwide.</about>
+        <ingredients>
+            <ingredient>Chicken, 500g</ingredient>
+            <ingredient>Curry Powder, 2 tbsp</ingredient>
+            <ingredient>Coconut Milk, 400ml</ingredient>
+            <ingredient>Onion, 1 large</ingredient>
+            <ingredient>Garlic, 3 cloves</ingredient>
+            <ingredient>Ginger, 1 tsp grated</ingredient>
+            <ingredient>Vegetable Oil, 2 tbsp</ingredient>
+        </ingredients>
+        <instructions>
+            Heat oil in a pan and sauté chopped onion, garlic, and ginger until fragrant. Add chicken pieces and cook until lightly browned. Sprinkle curry powder and mix well. Pour in coconut milk, simmer on low heat for 25 minutes. Serve hot with rice.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Margherita Pizza</title>
+        <about>A classic pizza from Naples, Italy.</about>
+        <ingredients>
+            <ingredient>Pizza Dough, 300g</ingredient>
+            <ingredient>Tomato Sauce, 150ml</ingredient>
+            <ingredient>Mozzarella Cheese, 200g</ingredient>
+            <ingredient>Fresh Basil Leaves, 6</ingredient>
+            <ingredient>Olive Oil, 1 tbsp</ingredient>
+        </ingredients>
+        <instructions>
+            Roll out pizza dough and spread tomato sauce evenly on top. Add slices of mozzarella cheese and fresh basil leaves. Drizzle with olive oil. Bake in a preheated oven at 220°C (430°F) for 10-12 minutes until the crust is golden.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Sushi Rolls</title>
+        <about>A Japanese delicacy with worldwide fame.</about>
+        <ingredients>
+            <ingredient>Sushi Rice, 250g</ingredient>
+            <ingredient>Nori Sheets, 5</ingredient>
+            <ingredient>Fresh Salmon, 150g</ingredient>
+            <ingredient>Avocado, 1 medium</ingredient>
+            <ingredient>Soy Sauce, 50ml</ingredient>
+        </ingredients>
+        <instructions>
+            Cook sushi rice and let it cool. Place a nori sheet on a bamboo mat, spread rice evenly, and layer with sliced salmon and avocado. Roll tightly, slice into pieces, and serve with soy sauce.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Caesar Salad</title>
+        <about>Created in Tijuana, Mexico, by Caesar Cardini.</about>
+        <ingredients>
+            <ingredient>Romaine Lettuce, 200g</ingredient>
+            <ingredient>Parmesan Cheese, 50g</ingredient>
+            <ingredient>Croutons, 100g</ingredient>
+            <ingredient>Caesar Dressing, 100ml</ingredient>
+            <ingredient>Chicken Breast, 200g</ingredient>
+        </ingredients>
+        <instructions>
+            Grill chicken breast and slice thinly. Toss lettuce, croutons, and Parmesan with Caesar dressing. Top with grilled chicken and extra Parmesan shavings.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Pad Thai</title>
+        <about>A beloved street food from Thailand.</about>
+        <ingredients>
+            <ingredient>Rice Noodles, 200g</ingredient>
+            <ingredient>Shrimp, 150g</ingredient>
+            <ingredient>Egg, 2</ingredient>
+            <ingredient>Bean Sprouts, 100g</ingredient>
+            <ingredient>Tamarind Paste, 2 tbsp</ingredient>
+            <ingredient>Peanuts, 50g</ingredient>
+        </ingredients>
+        <instructions>
+            Soak rice noodles in warm water until soft. In a wok, stir-fry shrimp, beaten eggs, and bean sprouts. Add tamarind paste and cooked noodles, toss well. Garnish with chopped peanuts and lime wedges.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Tom Yum Soup</title>
+        <about>A spicy and sour soup from Thailand.</about>
+        <ingredients>
+            <ingredient>Chicken Broth, 500ml</ingredient>
+            <ingredient>Shrimp, 200g</ingredient>
+            <ingredient>Tom Yum Paste, 2 tbsp</ingredient>
+            <ingredient>Mushrooms, 100g</ingredient>
+            <ingredient>Lemongrass, 2 stalks</ingredient>
+            <ingredient>Kaffir Lime Leaves, 4</ingredient>
+        </ingredients>
+        <instructions>
+            Boil chicken broth with lemongrass and lime leaves. Add Tom Yum paste and sliced mushrooms. Add shrimp and cook until pink. Serve hot with a squeeze of lime.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Beef Stroganoff</title>
+        <about>A classic Russian dish with tender beef in creamy sauce.</about>
+        <ingredients>
+            <ingredient>Beef Sirloin, 300g</ingredient>
+            <ingredient>Mushrooms, 150g</ingredient>
+            <ingredient>Onion, 1 medium</ingredient>
+            <ingredient>Sour Cream, 200ml</ingredient>
+            <ingredient>Butter, 2 tbsp</ingredient>
+            <ingredient>Flour, 1 tbsp</ingredient>
+            <ingredient>Paprika, 1 tsp</ingredient>
+        </ingredients>
+        <instructions>
+            Slice beef into strips and season with paprika. In a pan, melt butter and cook onions and mushrooms until soft. Add beef and brown slightly. Stir in flour, then add sour cream. Simmer for 10 minutes and serve over pasta or rice.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>French Onion Soup</title>
+        <about>A comforting soup from France, rich with caramelized onions.</about>
+        <ingredients>
+            <ingredient>Onions, 500g</ingredient>
+            <ingredient>Beef Broth, 1 liter</ingredient>
+            <ingredient>Butter, 2 tbsp</ingredient>
+            <ingredient>White Wine, 100ml</ingredient>
+            <ingredient>Baguette Slices, 4</ingredient>
+            <ingredient>Gruyere Cheese, 100g</ingredient>
+        </ingredients>
+        <instructions>
+            Slice onions thinly and caramelize in butter over low heat. Add white wine and simmer until reduced. Pour in beef broth and simmer for 20 minutes. Serve with toasted baguette slices topped with melted Gruyere cheese.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Guacamole</title>
+        <about>A traditional Mexican avocado dip, simple and flavorful.</about>
+        <ingredients>
+            <ingredient>Avocados, 3 medium</ingredient>
+            <ingredient>Lime Juice, 2 tbsp</ingredient>
+            <ingredient>Tomato, 1 medium</ingredient>
+            <ingredient>Onion, 1 small</ingredient>
+            <ingredient>Fresh Cilantro, 2 tbsp chopped</ingredient>
+            <ingredient>Salt, 1 tsp</ingredient>
+        </ingredients>
+        <instructions>
+            Mash avocados in a bowl. Finely dice tomato and onion, and mix into avocados. Add lime juice, chopped cilantro, and salt. Stir well and serve with tortilla chips.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Tiramisu</title>
+        <about>An Italian coffee-flavored dessert with mascarpone.</about>
+        <ingredients>
+            <ingredient>Ladyfingers, 200g</ingredient>
+            <ingredient>Mascarpone Cheese, 250g</ingredient>
+            <ingredient>Espresso, 100ml</ingredient>
+            <ingredient>Cocoa Powder, 2 tbsp</ingredient>
+            <ingredient>Egg Yolks, 3</ingredient>
+            <ingredient>Sugar, 100g</ingredient>
+        </ingredients>
+        <instructions>
+            Beat egg yolks with sugar until creamy. Mix in mascarpone cheese. Dip ladyfingers in espresso and layer with mascarpone mixture. Repeat layers and dust with cocoa powder. Chill for 4 hours before serving.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Falafel</title>
+        <about>A Middle Eastern deep-fried chickpea patty.</about>
+        <ingredients>
+            <ingredient>Chickpeas, 200g</ingredient>
+            <ingredient>Onion, 1 small</ingredient>
+            <ingredient>Parsley, 2 tbsp chopped</ingredient>
+            <ingredient>Garlic, 2 cloves</ingredient>
+            <ingredient>Flour, 2 tbsp</ingredient>
+            <ingredient>Cumin, 1 tsp</ingredient>
+        </ingredients>
+        <instructions>
+            Blend chickpeas, onion, parsley, and garlic in a food processor. Add flour and cumin, and form into small patties. Deep-fry until golden and serve with tahini sauce.
+        </instructions>
+    </recipe>
+
+    <recipe>
+        <title>Ratatouille</title>
+        <about>A traditional vegetable dish from Provence, France.</about>
+        <ingredients>
+            <ingredient>Zucchini, 1 medium</ingredient>
+            <ingredient>Eggplant, 1 medium</ingredient>
+            <ingredient>Tomatoes, 2 medium</ingredient>
+            <ingredient>Bell Pepper, 1 medium</ingredient>
+            <ingredient>Onion, 1 small</ingredient>
+            <ingredient>Olive Oil, 2 tbsp</ingredient>
+        </ingredients>
+        <instructions>
+            Slice vegetables and layer in a baking dish. Drizzle with olive oil, season with salt and herbs. Bake at 180°C (350°F) for 40 minutes. Serve warm or cold as a side dish.
+        </instructions>
+    </recipe>
+
+</recipes>
