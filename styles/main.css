@@ -60,7 +60,32 @@ section h2 {
     border-radius: 5px; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
+/* buttons style */
+button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+button.edit {
+    /* background-color: #4caf4fa9; */
+    opacity: 0.3;
+    color: black;
+}
+button.delete {
+    /* background-color: #f44336b4; */
+    opacity: 0.3;
+    color: black;
+}
+button.edit:hover {
+    background-color: #4caf4fa9;
+    opacity: 1;
+}
+button.delete:hover {
+    background-color: #f44336b4;
+    opacity: 1;
+}
 /* footer style */
 footer {
     text-align: center;

@@ -20,6 +20,7 @@ This project is a simple web application called "Cook Book." It demonstrates the
 - Interactivity, such as:
   - Clicking on a recipe name to display its details.
   - Adding new recipes through a simple form.
+  - Editing, and deleting recipes dynamically.
 
 ### XML
 - Cook data is stored in an XML file, with each recipe containing:
@@ -59,7 +60,6 @@ This project is a simple web application called "Cook Book." It demonstrates the
 ```
 
 ## Future Improvements
-- Enable adding, editing, and deleting recipes dynamically.
 - Add a search functionality for recipes.
 - Improve mobile responsiveness.
 
