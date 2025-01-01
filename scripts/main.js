@@ -1,28 +1,43 @@
+// global variable to hold XML document
+let xmlDoc = null;
+
 // load recipes from xml file
-async function loadRecipes() {
+async function loadRecipesXml() {
+    try {
+        // Fetch API (returns a promise), fetch XML file from specified path
+        const response = await fetch('data/recipes.xml');
 
-    // Fetch API (returns a promise), fetch XML file from specified path
-    const response = await fetch('data/recipes.xml');
+        // Check if the fetch was successful
+        if (!response.ok) {
+            throw new Error(`Failed to load XML file: ${response.statusText}`);
+        }
+        // parse response as plain text
+        const text = await response.text();
 
-    // read response as plain text
-    const text = await response.text();
+        // create a DOMParser instance to parse XML content into a DOM Document
+        const parser = new DOMParser();
 
-    // create a DOMParser instance to parse XML content into a DOM Document
-    const parser = new DOMParser();
+        // parse string as XML content into a DOM object
+        xmlDoc = parser.parseFromString(text, 'application/xml') // save to global variable and throw if not well-formed
 
-    // parse string as XML content into a DOM object
-    xmlDoc = parser.parseFromString(text, 'application/xml') // save to global variable and throw if not well-formed
+        // Check if the XML is well-formed
+        if (xmlDoc.querySelector('parsererror')) {
+            throw new Error('The XML file is not well-formed.');
+        }
 
-    // return all <recipe> elements from XML document with tag name
-    return xmlDoc.getElementsByTagName('recipe');
+    } catch (error) {
+        console.error('Error loading XML:', error);
+        throw error; // re-throw error for further handling
+    }
 }
 
 // display recipes list
-async function displayRecipes() {
+function displayRecipes(recipes = null) {
 
-    // load recipes by resolving promise after loading
-    //const recipes = await loadRecipes();
-    const recipes = xmlDoc.getElementsByTagName('recipe'); // from global variable
+    // if no recipes are passed, load all recipes from global xmlDoc variable
+    if (!recipes) {
+        recipes = Array.from(xmlDoc.getElementsByTagName('recipe'));
+    }
 
     // select the first matching <ul> element within the #recipe-list section in the DOM
     const recipeList = document.querySelector('#recipe-list ul');
@@ -32,7 +47,7 @@ async function displayRecipes() {
 
     // iterate through recipes and create list items for each one
     // converts an array-like object to a real array
-    Array.from(recipes).forEach((recipe, index) => {
+    recipes.forEach((recipe) => {
 
         // extract title of the recipe
         const title = recipe.querySelector('title').textContent;
@@ -42,10 +57,10 @@ async function displayRecipes() {
 
         // set the text content of the list item to the recipe title
         listItem.textContent = title;
-
-        // store the recipe index as a custom data attribute 
-        // dataset allows storing custom data attributes (data-*)
-        listItem.dataset.index = index; 
+        
+        listItem.addEventListener('click', () => {
+            displayRecipeDetails(recipe); // pass the recipe object directly
+        });
 
         // create edit button
         const editButton = document.createElement('button');
@@ -53,7 +68,8 @@ async function displayRecipes() {
         editButton.className = 'edit';
         // add click event handler to each edit button
         editButton.addEventListener('click', () => {
-            loadRecipeToForm(recipe, index); // load recipe data into the form
+            event.stopPropagation();
+            loadRecipeToForm(recipe); // load recipe data into the form
         });
 
         // create delete button and event handler
@@ -61,7 +77,8 @@ async function displayRecipes() {
         deleteButton.textContent = 'Delete';
         deleteButton.className = 'delete';
         deleteButton.addEventListener('click', () => {
-            deleteRecipeXml(index); // delete recipe
+            event.stopPropagation(); // prevent event from bubbling up to <li> element
+            deleteRecipe(recipe); // delete recipe
         });
 
         // append buttons to the list item
@@ -70,26 +87,6 @@ async function displayRecipes() {
 
         // append to the recipe list
         recipeList.appendChild(listItem);
-    });
-
-    // add click event handler to each recipe list item
-    addRecipeClickHandlers(recipes);
-}
-
-// add click handler 
-function addRecipeClickHandlers(recipes) {
-
-    // select all matching <li> elements within the recipe list
-    const listItems = document.querySelectorAll('#recipe-list ul li');
-
-    // iterates over each element in a list and attach a click event listener to each list item
-    listItems.forEach((item) => {
-        item.addEventListener('click', () => {
-
-            // retrieve index of clicked recipe from the data attribute and display the details
-            const index = item.dataset.index;
-            displayRecipeDetails(recipes[index]);
-        });
     });
 }
 
@@ -131,7 +128,8 @@ function displayRecipeDetails(recipe) {
 }
 
 // load recipe data to form
-function loadRecipeToForm(recipe, index) {
+function loadRecipeToForm(recipe) {
+
     // filling form with recipe data
     document.querySelector('#recipe-title').value = recipe.querySelector('title').textContent;
     document.querySelector('#recipe-about').value = recipe.querySelector('about').textContent;
@@ -156,7 +154,7 @@ function loadRecipeToForm(recipe, index) {
         }
 
         editRecipe(
-            index,
+            recipe,
             document.querySelector('#recipe-title').value,
             document.querySelector('#recipe-about').value,
             document.querySelector('#recipe-ingredients').value,
@@ -169,10 +167,18 @@ function loadRecipeToForm(recipe, index) {
         saveButton.onclick = addNewRecipe;
 
         // reset details section
-        document.querySelector('#recipe-details').innerHTML = '<p>Select a recipe to see details.</p>'; 
+        clearDetails();
         // clearing form after update recipe data
         clearForm();
     };
+}
+
+//clear details
+function clearDetails() {
+    document.querySelector('#recipe-details').innerHTML = `
+            <h2>Recipe details</h2>
+            <p>Select a recipe to see details.</p>
+        `; // reset details section
 }
 
 // clear form
@@ -191,11 +197,6 @@ function clearForm() {
 // add new recipe data element including image string
 function addRecipeXml(title, about, ingredients, instructions, imageBase64) {
 
-    // if (!xmlDoc) {
-    //     console.error('XML document is not loaded.');
-    //     return;
-    // }
-    
     const newRecipe = xmlDoc.createElement('recipe');
 
     const titleElem = xmlDoc.createElement('title');
@@ -221,7 +222,7 @@ function addRecipeXml(title, about, ingredients, instructions, imageBase64) {
     // saving image base64 string to xml file
     if (imageBase64) {
         const imageElem = xmlDoc.createElement('image');
-        imageElem.textContent = imageBase64; 
+        imageElem.textContent = imageBase64;
         newRecipe.appendChild(imageElem);
     }
 
@@ -233,36 +234,12 @@ function addRecipeXml(title, about, ingredients, instructions, imageBase64) {
 }
 
 // edit existing recipe element in place, modified replace recipe data element when edit
-function editRecipe(index, title, about, ingredients, instructions, imageBase64) {
-    
-    // current 
-    const recipe = xmlDoc.getElementsByTagName('recipe')[index];
+function editRecipe(recipe, title, about, ingredients, instructions, imageBase64) {
 
-    // recipe.querySelector('title').textContent = title;
-    // recipe.querySelector('about').textContent = about;
+    // delete current recipe
+    deleteRecipeXml(recipe);
 
-    // const ingredientsElem = recipe.querySelector('ingredients');
-
-    // ingredientsElem.innerHTML = '';
-
-    // // brake down ingredients by and add them one by one
-    // ingredients.split(';').forEach((ingredient) => {
-    //     const ingElem = xmlDoc.createElement('ingredient');
-    //     ingElem.textContent = ingredient.trim();
-    //     ingredientsElem.appendChild(ingElem);
-    // });
-
-    // recipe.querySelector('instructions').textContent = instructions;
-
-    // const imageElem = recipe.querySelector('image') || xmlDoc.createElement('image');
-    // imageElem.textContent = imageBase64;
-    // if (!recipe.querySelector('image')) {
-    //     recipe.appendChild(imageElem);
-    // }
-
-    // delete current
-    xmlDoc.documentElement.removeChild(recipe);
-    // add new
+    // add updated recipe data as new
     addRecipeXml(title, about, ingredients, instructions, imageBase64);
 }
 
@@ -292,7 +269,7 @@ async function addNewRecipe() {
 }
 
 // transform img file into base64-encoded string
-function getBase64(file) { 
+function getBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result); // file content to base64
@@ -301,23 +278,36 @@ function getBase64(file) {
     });
 }
 
-// delete recipe from xml file
-function deleteRecipeXml(index) { 
-    
-    const recipe = xmlDoc.getElementsByTagName('recipe')[index];
-    
-    // delete selected xml recipe element
-    xmlDoc.documentElement.removeChild(recipe);
+function deleteRecipe(recipe) {
 
+    deleteRecipeXml(recipe);
+    
+    clearDetails();
     displayRecipes();
-    document.querySelector('#recipe-details').innerHTML = '<p>Select a recipe to see details.</p>'; // reset details section
 }
 
-// search recipe 
+// delete recipe from glogal variable
+function deleteRecipeXml(recipe) {
+
+    xmlDoc.documentElement.removeChild(recipe);
+}
+
+// search recipe by any keyword
 function searchRecipes(keyword) {
-    
+
     // XPath query to match recipes containing keyword in title or about
-    const xpathQuery = `//recipe[contains(title, '${keyword}') or contains(about, '${keyword}')]`;
+    //const xpathQuery = `//recipe[contains(title, '${keyword}') or contains(about, '${keyword}')]`;
+    const xpathQuery = `
+        //recipe[
+            contains(translate(title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '${keyword}') 
+            or 
+            contains(translate(about, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '${keyword}')
+            or
+            ingredients/ingredient[
+                contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '${keyword}')
+            ]
+        ]
+    `;
 
     // evaluate XPath query and retrieve matching nodes
     const results = document.evaluate(xpathQuery, xmlDoc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
@@ -327,36 +317,119 @@ function searchRecipes(keyword) {
     for (let index = 0; index < results.snapshotLength; index++) {
         recipes.push(results.snapshotItem(index));
     }
-    
+
     return recipes;
 }
 
 // filter recipes list by ingredient
 function filterRecipesByIngredient(ingredientFilter) {
 
+    const keyword = ingredientFilter.toLowerCase();
+
     // XPath query to find recipes containing specified ingredient
-    const xpathQuery = `//recipe[ingredients/ingredient[contains(text(), '${ingredientFilter}')]]`;
+    //const xpathQuery = `//recipe[ingredients/ingredient[contains(text(), '${ingredientFilter}')]]`;
+    const xpathQuery =  `
+        //recipe[
+            ingredients/ingredient[
+                contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '${keyword}')
+            ]
+        ]
+    `;
 
     const results = document.evaluate(xpathQuery, xmlDoc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
 
-    const recipes = [];
-    for (let index = 0; index < results.snapshotLength; index++) {
-        recipes.push(results.snapshotItem(index));
-    }
-    
+    const recipes = Array.from({ length: results.snapshotLength }, (_, i) => results.snapshotItem(i));
+
     return recipes;
-} 
+}
+
+// display recipes after search or filter 
+function displayRecipesFromResults(recipes) {
+
+    const recipeList = document.querySelector('#recipe-list ul');
+
+    recipeList.innerHTML = ''; // clear list
+
+    recipes.forEach((recipe) => {
+
+        const title = recipe.querySelector('title').textContent;
+
+        const listItem = document.createElement('li');
+        listItem.textContent = title;
+
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.className = 'edit';
+        editButton.addEventListener('click', () => loadRecipeToForm(recipe));
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'delete';
+        deleteButton.addEventListener('click', () => deleteRecipeXml(recipe));
+
+        listItem.appendChild(editButton);
+        listItem.appendChild(deleteButton);
+
+        recipeList.appendChild(listItem);
+    });
+}
 
 // initialize by displaying the recipes when DOM is loaded
-let xmlDoc;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    await loadRecipes(); // loading existing data to global variable
-    displayRecipes(); // loading existing items
+    // loading existing data to global variable
+    await loadRecipesXml();
+    // loading existing items
+    displayRecipes(); 
 
     // event handler to clear form before adding new
     document.querySelector('#add-new-recipe').addEventListener('click', () => {
-        clearForm(); 
+        clearForm();
+    });
+
+    // event handler for search 
+    document.querySelector('#search-button').addEventListener('click', () => {
+
+        const keyword = document.querySelector('#search-input').value.trim().toLowerCase();
+
+        if (!keyword) {
+            //alert('Please enter a keyword to search.');
+            displayRecipes(); // display all recipes cleared
+            return;
+        }
+
+        const results = searchRecipes(keyword);
+
+        if (results.length > 0) {
+            //displayRecipesFromResults(results); 
+            displayRecipes(results); // display search results
+        }
+        else {
+            //alert('No recipes found matching your search.');
+            document.querySelector('#recipe-list ul').innerHTML = '<li>No recipes found.</li>';
+        }
+    });
+
+    // event handler for filtering
+    document.querySelectorAll('#predefined-filters .filter-option').forEach((filter) => {
+        filter.addEventListener('click', () => {
+            
+            const ingredient = filter.textContent.trim().toLowerCase();
+            const results = filterRecipesByIngredient(ingredient);
+
+            if (results.length > 0) {
+                displayRecipes(results); // display filtered results
+            }
+            else {
+                document.querySelector('#recipe-list ul').innerHTML = `<li>No recipes found with ${ingredient}.</li>`;
+            }
+        });
+    });
+
+    // event handler for resetting 
+    document.querySelector('#reset-button').addEventListener('click', () => {
+        //resetRecipeList();
+        displayRecipes(); // simply show all recipes
     });
 });

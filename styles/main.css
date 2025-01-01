@@ -7,6 +7,7 @@ body {
     color: #333; /* text color */
     line-height: 1.6; /* increased line height for better readability */
 }
+
 /* header style */
 header {
     background-color: #4caf50;
@@ -17,28 +18,82 @@ header {
 header h1 {
     margin: 20px;
 }
+
+/* footer style */
+footer {
+    text-align: left;
+    text-indent: 20px;
+    padding: 10px 0;
+    background: #333;
+    color: white;
+    margin-top: 20px; /* auto push footer to the bottom */
+}
+
 /* content style */
 main {
     display: flex; /* flex container */
-    justify-content: space-between; /* distributes sections with space in between */
-    gap: 20px; /* gap between sections */
-    padding: 20px; /* padding inside the main container */
+    /*justify-content: space-between; /* distributes sections with space in between */
+    gap: 3px; /* gap between sections */
+    padding: 5px; /* padding inside the main container */
+    /*flex-wrap: wrap; /* wrapping for smaller screens */
 }
-/* sections style */
+
+/* sections and header*/
 section {
-    flex: 1; /* ensures sections grow/shrink equally */
+    flex: 1 1 25%; /* ensures sections grow/shrink proportionally minimum width 25% */
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* adds a subtle shadow effect */
 }
-/* section header style */
 section h2 {
     margin-top: 0; 
     color: #4caf50;
 }
-/* recipe list style */
+
+/* search and filter block */
+#search-and-list {
+    display: flex;
+    flex-direction: column; /* stack sections vertically */
+    /*flex: 2 1 auto; /* allow proportional resizing */
+    /*width: 100px; /* fixed width for the left column */
+    height: 100%; /* ensure it fills the parent's height */
+}
+#search-filter {
+    /*overflow-y: auto; /* enable scrolling for overflowing content */
+    margin-bottom: 15px; 
+}
+
+/* filter options */
+#predefined-filters {
+    display: flex; /* arrange items in a row */
+    list-style: none; /* avoid default list styling */
+    padding: 0;
+    margin: 5px 0;
+    gap: 5px; 
+}
+#predefined-filters .filter-option {
+    background-color: #4caf50;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-align: center;
+}
+#predefined-filters .filter-option:hover {
+    background-color: #45a049;
+}
+
+/* recipe list block*/
+#recipe-list {
+    flex: 1; /* take up remaining vertical space */
+    overflow-y: auto; /* enable scrolling for long lists */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 #recipe-list ul {
     list-style: none; /* removes default list bullets */
     padding: 0;
@@ -51,15 +106,7 @@ section h2 {
 #recipe-list ul li:hover {
     background-color: #f1f1f1; /* changes background on hover */
 }
-/* recipe image style */
-#recipe-details img {
-    width: 100%; /* take up full width of its container */
-    height: auto; /* keep aspect ratio */
-    max-height: 300px; /* sets max height to prevent oversized images */
-    object-fit: cover; /* image covers the given dimensions without distortion */
-    border-radius: 5px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+
 /* buttons style */
 button {
     margin-left: 10px;
@@ -86,11 +133,13 @@ button.delete:hover {
     background-color: #f44336b4;
     opacity: 1;
 }
-/* footer style */
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #333;
-    color: white;
-    margin-top: 20px;
+
+/* recipe details image */
+#recipe-details img {
+    width: 100%; /* take up full width of its container */
+    height: auto; /* keep aspect ratio */
+    max-height: 300px; /* sets max height to prevent oversized images */
+    object-fit: cover; /* image covers the given dimensions without distortion */
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

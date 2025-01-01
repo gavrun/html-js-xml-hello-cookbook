@@ -21,6 +21,8 @@ This project is a simple web application called "Cook Book." It demonstrates the
   - Clicking on a recipe name to display its details.
   - Adding new recipes through a simple form.
   - Editing, and deleting recipes dynamically.
+  - Search functionality for recipes
+  - Predefined recipes filters
 
 ### XML
 - Cook data is stored in an XML file, with each recipe containing:
@@ -60,6 +62,5 @@ This project is a simple web application called "Cook Book." It demonstrates the
 ```
 
 ## Future Improvements
-- Add a search functionality for recipes.
 - Improve mobile responsiveness.
 

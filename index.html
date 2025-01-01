@@ -29,15 +29,35 @@
     </header>
 
     <main>
-        <!-- layout section for displaying the list of recipes -->
-        <section id="recipe-list">
-            <h2>Recipe list</h2>
-            <ul>
-                <!-- placeholder dynamically populated list of recipies -->
-            </ul>
+        <!-- layout sections -->
+        
+        <section id="search-and-list">
+            <section id="search-filter">
+                <h2>Search and Filter</h2>
+    
+                <input type="text" id="search-input" placeholder="Search by keyword or ingredient">
+                <button id="search-button">Search</button>
+                <button id="reset-button">Reset</button><br><br>
+                
+                <ul id="predefined-filters">
+                    <li class="filter-option">Rice</li>
+                    <li class="filter-option">Bean</li>
+                    <li class="filter-option">Salmon</li>
+                    <li class="filter-option">Beef</li>
+                </ul>
+            </section>
+    
+            <!-- section for displaying the list of recipes -->
+            <section id="recipe-list">
+                <h2>Recipe list</h2>
+                <ul>
+                    <!-- placeholder dynamically populated list of recipies -->
+                </ul>
+            </section>
         </section>
 
-        <!-- layout section for details of the selected recipe -->
+
+        <!-- section for details of the selected recipe -->
         <section id="recipe-details">
             <h2>Recipe details</h2>
             <!-- placeholder for recipe details -->
